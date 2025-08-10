@@ -69,6 +69,22 @@ This is a simple LEX program that counts the number of C-style function definiti
 
 **Note:** The regular expression used to detect functions is simple and may not cover all possible C function declaration styles (e.g., K&R style). It assumes a function definition looks like `return_type function_name(arguments) {`.
 
+### How it Works: The Regular Expression
+
+The core of the function counter is this regular expression:
+
+`[a-zA-Z_][a-zA-Z0-9_]*[ \t\n]+[a-zA-Z_][a-zA-Z0-9_]*[ \t\n]*\([^\)]*\)[ \t\n]*\{`
+
+Here’s a breakdown of how it identifies a function:
+
+1.  **`[a-zA-Z_][a-zA-Z0-9_]*`** - Matches the function's **return type** (e.g., `int`, `void`). It looks for a standard C identifier (starts with a letter or underscore, followed by letters, numbers, or underscores).
+2.  **`[ \t\n]+`** - Matches the whitespace (spaces, tabs, newlines) between the return type and the function name.
+3.  **`[a-zA-Z_][a-zA-Z0-9_]*`** - Matches the **function name** itself, using the same identifier pattern.
+4.  **`[ \t\n]*\([^\)]*\)[ \t\n]*`** - Matches the argument list inside `()`. It allows for any characters inside the parentheses except for a closing parenthesis.
+5.  **`\{`** - Matches the opening curly brace `{`, which marks the beginning of the function body.
+
+When this entire pattern is found, the program increments the function count.
+
 ### Compilation and Execution
 
 1.  **Compile the LEX file:**
