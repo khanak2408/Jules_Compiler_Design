@@ -1,0 +1,21 @@
+// Test cases for exp_7.l
+
+// Valid inputs
+Mobile: 9876543210
+URL: https://www.example.com/path
+Identifier: my_variable_1
+Date: 25/12/2023
+Time: 14:30:00
+
+// Invalid inputs
+Invalid Mobile: 0123456789
+Invalid URL: ftp://invalid.url
+Invalid Identifier: 1_invalid
+Invalid Date: 32/13/2023
+Invalid Time: 25:61:61
+
+// Mixed and edge cases
+Another_id and another one http://a.b/c-d
+A date 31/01/2024 and time 23:59:59.
+Phone number 1234567890 in a sentence.
+An invalid date 31/04/2023 (logic error, but format is ok).
